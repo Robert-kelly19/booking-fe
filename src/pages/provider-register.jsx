@@ -55,7 +55,7 @@ export default function ProviderRes() {
   <>
   <div className="res-form">
     <form onsubmit={formik.handleSubmit}>
-        
+        <input type="email" name="email"  />
     </form>
   </div>
   </>
