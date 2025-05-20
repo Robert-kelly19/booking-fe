@@ -2,13 +2,12 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 
-export default function ProviderRes() {
+export default function Register() {
   const navigate = useNavigate();
   const validateSchema = Yup.object({
+    firstName: Yup.string().min(3).required("name is required"),
+    lastName: Yup.string().required("job is required"),
     email: Yup.string().email().required("email is required"),
-    name: Yup.string().min(3).required("name is required"),
-    job: Yup.string().required("job is required"),
-    description: Yup.string().min(20).required("description is required"),
     password: Yup.string()
       .required("Password is required")
       .min(5, "Password must be at least 8 characters")
@@ -42,10 +41,9 @@ export default function ProviderRes() {
 
   const formik = useFormik({
     initialValues: {
+      firstName: "",
+      lastName: "",
       email: "",
-      name: "",
-      job: "",
-      description: "",
       password: "",
       comfirmPassword: "",
     },
@@ -59,6 +57,34 @@ export default function ProviderRes() {
         <h3>create a new account</h3>
         <hr />
           <div>
+            <label htmlFor="firstName">firstName</label>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="enter your first name"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.firstName}
+            />
+            {formik.touched.firstName && formik.errors.firstName && (
+              <div style={{ color: "red" }}>{formik.errors.firstName}</div>
+            )}
+          </div>
+          <div>
+            <label htmlFor="lastName">lastName</label>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="enter your last name"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.lastName}
+            />
+            {formik.touched.lastName && formik.errors.lastName && (
+              <div style={{ color: "red" }}>{formik.errors.lastName}</div>
+            )}
+          </div>
+          <div>
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -70,48 +96,6 @@ export default function ProviderRes() {
             />
             {formik.touched.email && formik.errors.email && (
               <div style={{ color: "red" }}>{formik.errors.email}</div>
-            )}
-          </div>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="enter your name"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
-            {formik.touched.name && formik.errors.name && (
-              <div style={{ color: "red" }}>{formik.errors.name}</div>
-            )}
-          </div>
-          <div>
-            <label htmlFor="job">Job</label>
-            <input
-              type="text"
-              name="job"
-              placeholder="enter your job"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.job}
-            />
-            {formik.touched.job && formik.errors.job && (
-              <div style={{ color: "red" }}>{formik.errors.job}</div>
-            )}
-          </div>
-          <div>
-            <label htmlFor="description">Description</label>
-            <input
-              type="text"
-              name="description"
-              placeholder="exaple i offer graphics design services"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.description}
-            />
-            {formik.touched.description && formik.errors.description && (
-              <div style={{ color: "red" }}>{formik.errors.description}</div>
             )}
           </div>
           <div>
@@ -131,7 +115,7 @@ export default function ProviderRes() {
           <div>
             <label htmlFor="comfirmPassword">comfirmPassword</label>
             <input
-              type="password"
+              type="comfirmPassword"
               name="comfirmPassword"
               placeholder="enter your comfirmPassword"
               onChange={formik.handleChange}
@@ -152,7 +136,7 @@ export default function ProviderRes() {
           <button
             id="switch"
             type="button"
-            onClick={() => navigate("/provider-login")}
+            onClick={() => navigate("/user-login")}
           >
             Already have an account
           </button>
