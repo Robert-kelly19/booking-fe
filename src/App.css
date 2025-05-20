@@ -1,0 +1,47 @@
+body {
+  background-color: black;
+  color: white;
+} 
+
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.intro-grid {
+  width: 40%;
+}
+
+.intro-grid h1 {
+  font-size: 55px;
+}
+
+.intro-grid span {
+  background-color: #44444c;
+}
+
+.intro-grid p {
+  font-size: 25px;
+  margin-top: -30px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-left: -50px;
+}
+
+.button button {
+  border: transparent;
+  border-radius: 5px;
+  width: max-content;
+  padding: 10px;
+  font-size: large;
+  font-weight: 500;
+  background-color: #44444c;
+  color: white;
+}
+
