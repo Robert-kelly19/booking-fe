@@ -21,14 +21,11 @@ export default function ProviderRes() {
   });
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const res = await fetch(
-        `https://url-shortener-production-0bea.up.railway.app/auth/register`,
-        {
-          method: "post",
-          headers: { "content-Type": "application/json" },
-          body: JSON.stringify(values),
-        }
-      );
+      const res = await fetch(`http://localhost:4000/auth/providerRegister`, {
+        method: "post",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
       const data = await res.json();
       console.log("submitted data:", data);
       resetForm();
@@ -56,8 +53,8 @@ export default function ProviderRes() {
     <>
       <div className="res-form">
         <form onSubmit={formik.handleSubmit}>
-        <h3>create a new account</h3>
-        <hr />
+          <h3>create a new account</h3>
+          <hr />
           <div>
             <label htmlFor="email">Email</label>
             <input

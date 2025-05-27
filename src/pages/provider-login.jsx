@@ -17,7 +17,7 @@ export default function Providerlogin() {
       setApiError("");
 
       const response = await fetch(
-        `https://url-shortener-production-0bea.up.railway.app/auth/login`,
+        `http://localhost:4000/auth/providerlogin`,
         {
           method: "POST",
           headers: {
