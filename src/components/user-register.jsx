@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -28,10 +29,14 @@ export default function Register() {
           body: JSON.stringify(values),
         }
       );
+      if(!res.ok){
+        toast.error("error while registering")
+      }
       const data = await res.json();
-      console.log("submitted data:", data);
+      console.log("submitted data:", data)
+      toast.success(data.message || "user registered successfully!")
       resetForm();
-      navigate("/dashboard");
+      navigate("/login");
     } catch (error) {
       console.error("error while registring:", error);
     } finally {
@@ -45,16 +50,17 @@ export default function Register() {
       lastName: "",
       email: "",
       password: "",
-      comfirmPassword: "",
+      confirmPassword: "",
     },
     validationSchema: validateSchema,
-    onsubmit: handleSubmit,
+    onSubmit: handleSubmit,
   });
   return (
     <>
       <div className="res-form">
+        <div className="item">
         <form onSubmit={formik.handleSubmit}>
-        <h3>create a new account</h3>
+        <h3>Create Service Provider Account</h3>
         <hr />
           <div>
             <label htmlFor="firstName">firstName</label>
@@ -113,34 +119,36 @@ export default function Register() {
             )}
           </div>
           <div>
-            <label htmlFor="comfirmPassword">comfirmPassword</label>
+            <label htmlFor="confirmPassword">confirmPassword</label>
             <input
-              type="comfirmPassword"
-              name="comfirmPassword"
-              placeholder="enter your comfirmPassword"
+              type="password"
+              name="confirmPassword"
+              placeholder="enter your confirmPassword"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.comfirmPassword}
+              value={formik.values.confirmPassword}
             />
-            {formik.touched.comfirmPassword &&
-              formik.errors.comfirmPassword && (
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
                 <div style={{ color: "red" }}>
-                  {formik.errors.comfirmPassword}
+                  {formik.errors.confirmPassword}
                 </div>
               )}
           </div>
-          <button type="submit" id="btn" disabled={formik.isSubmitting}>
+          <button type="submit" id="btn1" disabled={formik.isSubmitting}>
             {formik.isSubmitting ? "Signing Up..." : "Sign Up"}
           </button>
-          <br /> <hr />
+          <br />
+        </form>
+        <hr />
           <button
             id="switch"
             type="button"
-            onClick={() => navigate("/user-login")}
+            onClick={() => navigate("/login")}
           >
             Already have an account
           </button>
-        </form>
+        </div>
       </div>
     </>
   );

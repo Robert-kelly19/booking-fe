@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Providerlogin() {
   const navigate = useNavigate();
@@ -28,10 +29,12 @@ export default function Providerlogin() {
       );
 
       if (!response.ok) {
+        toast.error("Login Failed. Check your credentails")
         throw new Error("Login failed. Please check your credentials.");
       }
 
       const data = await response.json();
+      toast.success(data.message || "Login successful")
       localStorage.setItem("token", data.token);
       resetForm();
       navigate("/dashboard");
@@ -57,7 +60,7 @@ export default function Providerlogin() {
       <div className="container">
         <div className="item">
           <div className="item1">
-            <h4>Login to your Account</h4>
+            <h4>Freelancer Login</h4>
           </div>
           <div className="item2">
             <form onSubmit={formik.handleSubmit}>
@@ -105,7 +108,7 @@ export default function Providerlogin() {
             </form>
           </div>
           <hr />
-          <button id="switch" onClick={() => navigate("/provider-register")}>
+          <button id="switch" onClick={() => navigate("/register")}>
             Create New Account
           </button>
         </div>

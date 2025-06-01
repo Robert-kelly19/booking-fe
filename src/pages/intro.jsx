@@ -13,11 +13,11 @@ export default function Intro() {
             and hybrid work.
           </p>
           <div className="button">
-            <button onClick={() => navigate("/user-register")}>
-              join as job provider
+            <button onClick={() => navigate("/register")}>
+              Join
             </button>
-            <button onClick={() => navigate("/provider-register")}>
-              join as freelancer
+            <button onClick={() => navigate("/login")}>
+              Login
             </button>
           </div>
         </div>

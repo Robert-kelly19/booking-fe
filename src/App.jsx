@@ -1,22 +1,21 @@
 import "./App.css";
 import { BrowserRouter,Routes,Route } from "react-router";
 import Intro from "./pages/intro";
-import ProviderRes from "./pages/provider-register";
-import Register from "./pages/user-register";
-import Providerlogin from "./pages/provider-login";
-import Login from "./pages/user-login";
+import SignInPage from "./pages/signIn";
+import LoginPage from "./pages/Login";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return <>
   <BrowserRouter>
   <Routes>
     <Route path="/" element={<Intro/>}/>
-    <Route path="/provider-register" element={<ProviderRes/>}/>
-    <Route path="/user-register" element={<Register/>}/>
-    <Route path="/provider-login" element={<Providerlogin/>}/>
-    <Route path="/user-login" element={<Login/>}/>
+    <Route path="/register" element={<SignInPage/>}/>
+    <Route path="/login" element={<LoginPage/>}/>
     </Routes>
     </BrowserRouter>
+    <ToastContainer position="top-center"/>
   </>
 }
 
